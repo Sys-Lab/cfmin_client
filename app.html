@@ -1,0 +1,676 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <!-- disable zooming -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0" />
+<script>
+$SYSVARS='';
+	var gui = require('nw.gui');
+	var win = gui.Window.get();
+	//win.showDevTools();
+	//win.setAlwaysOnTop(1);
+	win.setResizable(0);
+	win.height=600;
+	win.width=900;
+	win.y=(screen.availHeight-600)/2;
+	win.x=(screen.availWidth-900)/2;
+
+</script>
+<style>
+	html,body,input,textarea{
+			font-family:"微软雅黑";
+			color: #fff;
+			text-shadow: 1px 1px 10px #57C0EE;
+			overflow: hidden;
+	}
+	#main_filebox,#main_filebox_name,#main_choices,#main_go,
+	#main_bar2fill,#main_bar2,#box_trim_options,#main{
+		-webkit-transition:all .6s ease-in-out;
+		transition:all .6s ease-in-out;
+	}
+	::-webkit-scrollbar {
+	    width: 3px;
+	}
+	::-webkit-scrollbar-track {
+		width: 1px;
+		background-color:rgba(255,255,255,0.1);
+	} 
+	::-webkit-scrollbar-thumb {
+		width: 3px;
+		background-color:rgba(255,255,255,0.8);
+	    -webkit-box-shadow: inset 0 0 1px #81CFEC; 
+	}
+	#main{
+		position: absolute;
+		top:0px;
+		left:0px;
+		width: 900px;
+		height: 600px;
+		overflow: hidden;
+	}
+	#main_bg,#main_bg2,#main_close,#main_logo,#main_filebox,
+	#noticebox,#main_filebox_name,#main_choices,#main_go,
+	#main_bar2,#main_bar2fill,#box_trim_options_bg,#box_trim_options_list,
+	#box_alert_bg,#box_alert_icon,#box_alert_data{
+		position: absolute;
+	}
+	#main_bg{
+		width: 931px;
+		height: 643px;
+		top: -11px;
+		left: -15px;
+	}
+	#main_bg2{
+		bottom: 7px;
+		left: 11px;
+	}
+	#main_close{
+		bottom:0px;
+		left:0px;
+		cursor: pointer;
+	}
+	#main_logo{
+		top: 35px;
+		left: 6px;
+		opacity: 0.2;
+	}
+	#main_filebox{
+		top: 200px;
+		left: 400px;
+		opacity: 0.6;
+		cursor: pointer;
+	}
+	#main_filebox:hover{
+		opacity:1;
+	}
+	#main_filebox_name{
+		top: 350px;
+		left: 250px;
+		width: 200px;
+		text-align: center;
+		opacity: 0;
+	}
+	#noticebox{
+		width: 400px;
+		text-align: center;
+		top: 100px;
+		font-size: 24px;
+		left: 265px;
+	}
+	#main_fipt{
+		display: none;
+	}
+	#main_choices {
+		right: 150px;
+		top: 150px;
+		opacity: 0;
+	}
+	.main_choices_box{
+		width: 34px;
+		height: 34px;
+		background-image: url(res/img/mark_off.png);
+		display: inline-block;
+	}
+	.choices_on .main_choices_box{
+		background-image: url(res/img/mark_on.png);
+	}
+	.main_choices_text {
+		display: inline-block;
+		position: relative;
+		top: -10px;
+		left: 5px;
+	}
+	.main_choices{
+		cursor: pointer;
+	}
+	#trim_options_btn {
+		position: absolute;
+		top: 2px;
+		left: 150px;
+		padding: 5px 10px;
+		background-color: rgba(255, 255, 255, 0.65);
+		color: #B8B8B8;
+		box-shadow: 0 0 10px 2px #B8B8B8;
+		text-shadow: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	#trim_options_btn.on:hover{
+		opacity: 1;
+	}
+	#trim_options_btn.on{
+		opacity: .8;
+		color: #91D8F1;
+		box-shadow: 0 0 10px 2px #81CFEC;
+	}
+	#main_go{
+		bottom: 20px;
+		right: 50px;
+		height: 70px;
+		opacity: 0;
+	}
+	#main_go.on{
+		opacity: .8;
+		cursor: pointer;
+	}
+	#main_go.on:hover{
+		opacity: 1;
+	}
+	#main_bar2{
+		bottom: 20px;
+		right: 50px;
+		opacity: 0;
+		display: none;
+	}
+	#main_bar2fill{
+		bottom: 47px;
+		left: 529px;
+		width: 0;
+		height: 17px;
+		opacity: 0;
+		display: none;
+	}
+
+	#box_trim_options {
+		position: absolute;
+		top: 150px;
+		left: 300px;
+		opacity: 0;
+		margin-top: -500px;
+	}
+	#box_trim_options.on {
+		opacity: 1;
+		margin-top: 0px;
+	}
+	#box_trim_options_list {
+		top: 30px;
+		left: 20px;
+		width: 295px;
+	}
+	#box_trim_options_list div {
+		padding: 10px 20px;
+		margin: 5px 0;
+		cursor: pointer;
+		font-size: 18px;
+	}
+	#box_trim_options_list div:hover,#box_trim_options_list.on {
+		background-image: url(res/img/boxhover.png);
+	}
+
+	#box_alert{
+		position: absolute;
+		top: 150px;
+		left: 300px;
+		opacity: 0;
+		margin-top: -500px;
+	}
+	#box_alert.on {
+		opacity: 1;
+		margin-top: 0px;
+	}
+	#box_alert_data {
+		top: 120px;
+		left: 20px;
+		width: 295px;
+		height: 140px;
+		word-break: break-all;
+		overflow-y: scroll;
+	}
+	#box_alert_icon {
+		top: 20px;
+		left: 45px;
+	}
+</style>
+
+</head>
+<body>
+	<div id="main">
+		<input type="file" id="main_fipt" name="files[]"/>
+		<img id="main_bg" src="res/img/bg3.png">
+		<img id="main_bg2" src="res/img/bg2.png">
+		<img id="main_close" src="res/img/exit_on.png">
+		<img id="main_logo" src="res/img/logo_top.png">
+		<img id="main_filebox" src="res/img/file_open.png">
+		<img id="main_go" src="res/img/go.png">
+		<img id="main_bar2" src="res/img/bar2.png">
+		<img id="main_bar2fill" src="res/img/bar2fill.png">
+		<div id="noticebox">Choose A Font To Process</div>
+		<div id="main_filebox_name"></div>
+		<div id="main_choices">
+			<div id="trim_options_btn">Options</div>
+			<div id="trim" class="main_choices">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Trim Font</div>
+			</div>
+			<div id="ttf" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build TTF</div>
+			</div>
+			<div id="woff" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build WOFF</div>
+			</div>
+			<div id="eot" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build EOT</div>
+			</div>
+			<div id="svg" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build SVG</div>
+			</div>
+			<div id="css" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Gen CSS</div>
+			</div>
+			<div id="compress" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Compress with Zip</div>
+			</div>
+		</div>
+	</div>
+	<div id="box_trim_options">
+		<img id="box_trim_options_bg" src="res/img/boxbg.png">
+		<div id="box_trim_options_list">
+			<div id="box_trim_options_list_0">Use Custom Map</div>
+			<div id="box_trim_options_list_1" class="on" data="res/map/CHSOnly.svg">仅简体</div>
+			<div id="box_trim_options_list_2" data="res/map/CHS_CHT_Lite.svg">常用汉字</div>
+			<div id="box_trim_options_list_3" data="res/map/CHS_CHT_Full.svg">完整繁简体</div>
+		</div>
+	</div>
+	<div id="box_alert">
+		<img id="box_alert_bg" src="res/img/boxbg.png">
+		<img id="box_alert_icon" src="res/img/error.png">
+		<div id="box_alert_data"></div>
+	</div>
+</body>
+<script type="text/javascript" src="res/SYSLIB.min.js"></script>
+<script type="text/javascript">
+SYSLIB.settings.set("release",true);
+SYSLIB.settings.set("loglevel",1);
+__Sound.add('a',"res/media/a.ogg");
+__Sound.add('b',"res/media/b.ogg");
+window.onload=function(){
+	_f("#main").addListener('click',function(){
+		if(_f("#box_alert").has('on')){
+			_f("#box_alert").remove("on");
+			setTimeout(function(){
+				_f("#main").style.opacity=0;
+			},300);
+			setTimeout(function(){
+				window.reload();
+			},600);
+		}
+	})
+	_f("#main_close").addListener('mouseover',function(){
+		this.src="res/img/exit_off.png";
+	})
+	_f("#main_close").addListener('mouseout',function(){
+		this.src="res/img/exit_on.png";
+	})
+	_f("#main_close").addListener('click',function(){
+		window.parent.doclose();
+	})
+	_f("#main_filebox").addListener('click',function(){
+		_f("#main_fipt").click();
+	})
+	_f("#trim_options_btn").addListener('click',function(){
+		if(_c(this).has('on')){
+			_f("#box_trim_options").add("on");
+		}
+	})
+
+	var fill2=function(percent){
+		_f("#main_bar2fill").style.width=(percent/100)*303+"px";
+	}
+	kicks=0;
+	fill2_kick=function(){
+		kicks++;
+		fill2(KICK_length*kicks);
+	}
+	_f("#main_go").addListener('click',function(){
+		this.style.opacity=0;
+		setTimeout(function(){
+			_f("#main_go").style.display="none";
+			_f("#main_bar2fill").style.display="block";
+			_f("#main_bar2").style.display="block";
+			setTimeout(function(){
+				_f("#main_bar2fill").style.opacity=1;
+				_f("#main_bar2").style.opacity=1;
+			},100)
+		},300)
+		setTimeout(function(){
+			FULL_kick=10;
+			var file2=(loadedfile).split(".");
+			var orgext=(file2.pop()).toUpperCase();
+			if(orgext!="SVG"){
+				FULL_kick=FULL_kick+10;
+			}
+			if(options.trim){
+				FULL_kick=FULL_kick+2;
+			}
+			if(options.ttf){
+				FULL_kick++;
+			}
+			if(options.eot){
+				FULL_kick++;
+			}
+			if(options.woff){
+				FULL_kick++;
+			}
+			if(options.css){
+				FULL_kick++;
+			}
+			if(options.compress){
+				FULL_kick=FULL_kick+5;
+			}
+			KICK_length=100/FULL_kick;
+			start()
+		},1000)
+	})
+	loadedfile=0;
+	var loadmap=0;
+	var handleFilesuploadSelect = function (evt) {
+			var files = evt.target.files;
+			var font=files[0];
+			console.log(font);
+			if(loadmap){
+				options_trim=font.path;
+			}else{
+				if(!loadedfile){
+					_f("#main_filebox").src="res/img/file_loaded.png";
+					_f("#main_filebox").style.marginLeft="-125px";
+					_f("#noticebox").innerHTML='Choose What You Want';
+					_f("#main_filebox_name").style.opacity=1;
+					_f("#main_choices").style.opacity=1;
+					_f("#main_go").add("on");
+				}
+				_f("#main_filebox_name").innerHTML=font.name;
+				loadedfile=font.path;
+			}
+			_f("#main_fipt").value="";
+	}
+	_f("#main_fipt").addListener('change',handleFilesuploadSelect);
+	var olist=_f('.main_choices');
+	options={};
+	var change_options=function(){
+		if(_c(this).has("choices_on")){
+			_c(this).remove("choices_on");
+			options[this.id]=0;
+			if(this==_f("#trim")){
+				_f("#trim_options_btn").remove("on");
+			}
+		}else{
+			_c(this).add("choices_on");
+			options[this.id]=1;
+			if(this==_f("#trim")){
+				_f("#trim_options_btn").add("on");
+				_f("#box_trim_options").add("on");
+			}
+		}
+	}
+	for(var i=0;i<olist.length;i++){
+		options[olist[i].id]=1;
+		__Dom.nodeparser(olist[i]).addListener("click",change_options);
+	}
+	options_trim='';
+	var change_options_trim=function(){
+		if(this==_f("#box_trim_options_list_"+0)){
+			_f("#main_fipt").click();
+		}else{
+			options_trim=this.getAttribute("data");
+		}
+		_f("#box_trim_options").remove("on");
+	}
+	for(var i=0;i<4;i++){
+		_f("#box_trim_options_list_"+i).addListener("click",change_options_trim);
+	}
+}
+function min_svg(data1,data2,name){
+	try{
+		var map={};
+		var patt = /unicode=\"([\s\S]*?)\"/g;
+		var result=0;
+		while ((result = patt.exec(data2)) != null)  {
+				var yy=(result[1]!=" ")?result[1]:"FUCK";
+				map[yy]=1;
+		}
+		var flist='';
+		
+		var finfo=data1.match(/([\s\S]*?)<glyph[\s\S]{0,3}glyph-name=\"([\s\S]*?)\"[\s\S]{0,3}unicode/);
+		flist='';	
+		var patt = /<([\s\S]*?)unicode=\"([\s\S]*?)\"([\s\S]*?)\/>/g;
+		var result=0;
+		var i=0;
+		var j=0;
+		while ((result = patt.exec(data1)) != null)  {
+			i++;
+			var yy=(result[2]!=" ")?result[2]:"FUCK";
+			if(map[yy]||map[String.fromCharCode(yy)]){
+				flist=flist+result[0]+"\n";
+				j++;
+			}
+		}
+		flist=flist+"</font></defs></svg>";
+		if(!flist.match(/xml/)){
+			flist=finfo[1]+flist;
+		}
+		console.log("ORG: "+i);
+		console.log("NOW: "+j);
+		flist=flist.replace(/font-family=\"([/s/S]*?)\"/,'font-family="'+name+'"');
+		Ratio=parseInt((j/i)*100);
+		return flist;
+	}catch(e){
+		ERROR_REP(e);
+	}
+}
+////////////////////////load file////////////////////////////////
+var fs = require("fs");
+
+function readfile(filepath){
+	console.log("Loading file ...");
+	var data=fs.readFileSync(filepath);
+	return data.toString();
+}
+function savefile(filepath,data){
+	console.log("Minifying & Saving ...");
+	fs.writeFileSync(filepath,data);
+	console.log("Minified.");
+	return;
+}
+var spawn = require( 'child_process' ).spawn;
+var exec = require( 'child_process' ).exec;
+function start(){
+	try{
+		if(options.trim){
+			var mdata=readfile(options_trim);
+			fill2_kick();
+		}
+		var name='output';
+		var file2=(loadedfile).split(".");
+		var orgext=(file2.pop()).toUpperCase();
+		var file3=file2.join(".")+".svg";
+		var coned=function(){
+			fs.stat(file3, function (err, stat) {
+				if (err) {
+					ERROR_REP("Convert Error ! Please Check Your Font File.");
+					return 1;
+				}
+				var fdata=readfile(file3);
+				if(fdata&&mdata){
+					if(options.trim){
+						savefile('output/'+name+".svg",min_svg(fdata,mdata,name));
+					}else{
+						savefile('output/'+name+".svg",fdata);
+					}
+					fName_to_conv='output/'+name+".svg";
+					if(options.ttf){
+						fList_to_conv.push("ttf");
+					}
+					if(options.eot){
+						fList_to_conv.push("eot");
+					}
+					if(options.woff){
+						fList_to_conv.push("woff");
+					}
+					startconv();
+				}else{
+					ERROR_REP("File Is Empty !")
+				}
+			});
+		}
+		fName_to_conv=0;
+		fList_to_conv=[];
+		var cleaning=function(){
+			if(options.compress){
+					console.log("Cleaning ...");
+					if(options.ttf){
+						exec("del output/"+name+".ttf");
+						exec("rm output/"+name+".ttf");
+					}
+					if(options.eot){
+						exec("del output/"+name+".eot");
+						exec("del output/"+name+".afm");
+						exec("rm output/"+name+".eot");
+						exec("rm output/"+name+".afm");
+					}
+					if(options.css){
+						exec("del output/"+name+".css");
+						exec("rm output/"+name+".css");
+					}
+					if(options.svg){
+						exec("del output/"+name+".svg");
+						exec("rm output/"+name+".svg");
+					}
+					if(options.woff){
+						exec("del output/"+name+".woff");
+						exec("rm output/"+name+".woff");
+					}
+					console.log("Cleaning done.");
+			}else{
+				if(!options.svg){
+					exec("del output/"+name+".svg");
+				}
+			}
+			kicks=FULL_kick-1;
+			fill2_kick();
+			console.log("All done.");
+			process_done();
+			return;
+		}
+		var packing=function(){
+			var tt=[ 'a','output/'+name+'.zip'] ;
+			if(options.woff){
+				tt.push('output/'+name+'.woff');
+			}
+			if(options.ttf){
+				tt.push('output/'+name+'.ttf');
+			}
+			if(options.vg){
+				tt.push('output/'+name+'.svg');
+			}
+			if(options.eot){
+				tt.push('output/'+name+'.eot');
+				tt.push('output/'+name+'.afm');
+			}
+			if(options.css){
+				tt.push('output/'+name+'.css');
+			}
+			packer = spawn( 'win32/7z', tt);
+			packer.stdout.on('data', function (data) { 
+				console.log("PACKER: "+data);
+			});
+			packer.on( 'exit', function () { 
+				if(!ERR){
+					console.log("Packing done.");
+					kicks+=4;
+					fill2_kick();
+					cleaning();
+			 	}else{
+			 		ERROR_REP("Packing error");
+			 		return;
+			 	}
+			} );
+			var ERR='';
+			packer.stderr.on('data', function (data) { 
+				ERR=ERR+("PACKER: "+data);
+			});
+		}
+		var startconv=function(list){
+			if(!fList_to_conv||!fList_to_conv.length){
+				console.log("Conv done.");
+				if(options.css){
+					console.log("Generate CSS ...");
+					var opt="@font-face {\n\tfont-family: '"+name+"';\n\t";
+					if(options.eot){
+						opt=opt+"src: url('"+name+".eot');\n\t";
+					}
+					opt=opt+"src: ";
+					var tt=[];
+					if(options.woff){
+						tt.push("url('"+name+".woff') format('woff')");
+					}
+					if(options.ttf){
+						tt.push("url('"+name+".ttf') format('truetype')");
+					}
+					if(options.svg){
+						tt.push("url('"+name+".svg#"+name+"') format('svg')");
+					}
+					if(options.eot){
+						tt.push("url('"+name+".eot?#iefix') format('embedded-opentype')");
+					}
+					var cssDATA=opt+(tt.join(","))+";\n}";
+					savefile("output/"+name+".css",cssDATA);
+					fill2_kick();
+					console.log("CSS done.");
+				}
+				if(options.compress){
+					console.log("Packing ...");
+					packing();
+				}else{
+					cleaning();
+				}
+				return;
+			}
+			fill2_kick();
+			var nlist=fList_to_conv.shift();
+			console.log("Output As "+nlist.toUpperCase()+" ...");
+			var confont = spawn( 'win32/fontforge', [ "-script" ,"res/gen"+nlist+".pe",fName_to_conv] );
+			confont.on( 'exit',startconv );
+		}
+		console.log("File is "+orgext);
+		if(orgext=="SVG"){
+			coned();
+			return;
+		}
+		console.log("Converting To SVG ...");
+		var consvg = spawn( 'win32/fontforge', [ "-script" ,"res/gensvg.pe",loadedfile] );
+		var kic=setInterval(function(){
+			if(kicks>=10){
+				clearInterval(kic);
+			}
+			fill2_kick();
+		},3000)
+		consvg.on( 'exit',function(){
+			kicks=9;
+			fill2_kick();
+			coned();
+		} );
+	}catch(e){
+		ERROR_REP(e);
+	}
+
+}
+function process_done(){
+	exec("start output");
+}
+function ERROR_REP(e){
+	console.log(e);
+	_f("#box_alert_data").innerHTML=e;
+	_f("#box_alert").add("on");
+}
+</script>
+</html>
+
+
+
