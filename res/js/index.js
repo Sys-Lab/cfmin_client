@@ -29,7 +29,7 @@ window.onload=function(){
 			_f("#main").style.opacity=1;
 			__Sound.play('b');
 		},11500);
-	},3000);
+	},1000);
 }
 function doclose(){
 	window.opener=null;
