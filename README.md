@@ -15,4 +15,4 @@ just head to test dir and have fun.
 
 #Install
 
-download link here
+http://sys-lab.github.io/cfmin_client/
