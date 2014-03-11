@@ -1,0 +1,81 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <!-- disable zooming -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0" />
+<script>
+	$SYSVARS='';
+</script>
+<link href="css/app.css" rel="stylesheet">
+</head>
+<body>
+	<div id="main">
+		<input type="file" id="main_fipt" name="files[]"/>
+		<img id="main_bg" src="img/bg3.png">
+		<img id="main_bg2" src="img/bg2.png">
+		<img id="main_close" src="img/exit_on.png">
+		<img id="main_logo" src="img/logo_top.png">
+		<img id="main_filebox" src="img/file_open.png">
+		<img id="main_go" src="img/go.png">
+		<img id="main_bar2" src="img/bar2.png">
+		<img id="main_bar2fill" src="img/bar2fill.png">
+		<div id="noticebox">Choose A Font To Process</div>
+		<div id="main_filebox_name"></div>
+		<div id="main_choices">
+			<div id="trim_options_btn">Options</div>
+			<div id="trim" class="main_choices">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Trim Font</div>
+			</div>
+			<div id="ttf" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build TTF</div>
+			</div>
+			<div id="woff" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build WOFF</div>
+			</div>
+			<div id="eot" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build EOT</div>
+			</div>
+			<div id="svg" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Build SVG</div>
+			</div>
+			<div id="css" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Gen CSS</div>
+			</div>
+			<div id="compress" class="main_choices choices_on">
+				<div class="main_choices_box"></div>
+				<div class="main_choices_text">Compress with Zip</div>
+			</div>
+		</div>
+	</div>
+	<div id="box_trim_options">
+		<img id="box_trim_options_bg" src="img/boxbg.png">
+		<div id="box_trim_options_list">
+			<div id="box_trim_options_list_0">Use Custom Map</div>
+			<div id="box_trim_options_list_1" class="on" data="res/map/CHSOnly.svg">仅简体</div>
+			<div id="box_trim_options_list_2" data="res/map/CHS_CHT_Lite.svg">常用汉字</div>
+			<div id="box_trim_options_list_3" data="res/map/CHS_CHT_Full.svg">完整繁简体</div>
+		</div>
+	</div>
+	<div id="box_alert">
+		<img id="box_alert_bg" src="img/boxbg.png">
+		<img id="box_alert_icon" src="img/error.png">
+		<div id="box_alert_data"></div>
+	</div>
+	<div id="box_close">
+		<img id="box_close_bg" src="img/dialog.png">
+		<img id="box_close_yes" src="img/yes.png">
+		<img id="box_close_no" src="img/no.png">
+		<div id="box_close_data">Really want to close the app？</div>
+	</div>
+	<div id="box_ver">view on GitHub . Build 2014031101</div>
+</body>
+<script type="text/javascript" src="js/SYSLIB.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</html>

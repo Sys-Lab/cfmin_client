@@ -18,7 +18,7 @@
     "email": "mgbbs.mobile@gmail.com",
     "url": "http://www.syslab.us/"
   },
-  "main": "cfmin.js",
+
   "repository": {
     "type": "git",
     "url": "git://github.com/Sys-Lab/cfmin_client.git"
@@ -36,7 +36,7 @@
   },
   "licence": "MIT",
   "readme": "# SYSLIB Common Font Minification Tool. client version.\r\nBuild 2014030201.\r\n\r\nThis is a tool to compress font and gen webfont.\r\nIt can trim font with a map and then convert TTF/OTF/SVG/WOFF/EOT.... to TTF/SVG/WOFF/EOT and gen webfont css,then pack with zip.\r\n\r\nNow only windows are supported.\r\nI'm working on the dependencies' compile script.\r\n\r\njust head to test dir and have fun.\r\nThis is the client version.for command line go for cfmin.\r\n#Install\r\n\r\n  download and install",
-  "readmeFilename": "README.md","main": "index.html",
+  "readmeFilename": "README.md","main": "res/index.html",
   "window": {
     "frame": false,
 	"toolbar": false

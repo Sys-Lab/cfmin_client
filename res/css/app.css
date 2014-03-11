@@ -1,0 +1,245 @@
+﻿html,body,input,textarea{
+		font-family:"微软雅黑";
+		color: #fff;
+		text-shadow: 1px 1px 10px #57C0EE;
+		overflow: hidden;
+}
+#main_filebox,#main_filebox_name,#main_choices,#main_go,
+#main_bar2fill,#main_bar2,#box_trim_options,#main,#box_close{
+	-webkit-transition:all .6s ease-in-out;
+	transition:all .6s ease-in-out;
+}
+::-webkit-scrollbar {
+    width: 3px;
+}
+::-webkit-scrollbar-track {
+	width: 1px;
+	background-color:rgba(255,255,255,0.1);
+} 
+::-webkit-scrollbar-thumb {
+	width: 3px;
+	background-color:rgba(255,255,255,0.8);
+    -webkit-box-shadow: inset 0 0 1px #81CFEC; 
+}
+#main{
+	position: absolute;
+	top:0px;
+	left:0px;
+	width: 900px;
+	height: 600px;
+	overflow: hidden;
+}
+#main_bg,#main_bg2,#main_close,#main_logo,#main_filebox,
+#noticebox,#main_filebox_name,#main_choices,#main_go,
+#main_bar2,#main_bar2fill,#box_trim_options_bg,#box_trim_options_list,
+#box_alert_bg,#box_alert_icon,#box_alert_data,#box_close,#box_close_data,
+#box_close_yes,#box_close_no,#box_close_bg{
+	position: absolute;
+}
+#main_bg{
+	width: 931px;
+	height: 643px;
+	top: -11px;
+	left: -15px;
+}
+#main_bg2{
+	bottom: 7px;
+	left: 11px;
+}
+#main_close{
+	bottom:0px;
+	left:0px;
+	cursor: pointer;
+}
+#main_logo{
+	top: 35px;
+	left: 6px;
+	opacity: 0.2;
+}
+#main_filebox{
+	top: 200px;
+	left: 400px;
+	opacity: 0.6;
+	cursor: pointer;
+}
+#main_filebox:hover{
+	opacity:1;
+}
+#main_filebox_name{
+	top: 350px;
+	left: 250px;
+	width: 200px;
+	text-align: center;
+	opacity: 0;
+}
+#noticebox{
+	width: 400px;
+	text-align: center;
+	top: 100px;
+	font-size: 24px;
+	left: 265px;
+}
+#main_fipt{
+	display: none;
+}
+#main_choices {
+	right: 150px;
+	top: 150px;
+	opacity: 0;
+}
+.main_choices_box{
+	width: 34px;
+	height: 34px;
+	background-image: url(../img/mark_off.png);
+	display: inline-block;
+}
+.choices_on .main_choices_box{
+	background-image: url(../img/mark_on.png);
+}
+.main_choices_text {
+	display: inline-block;
+	position: relative;
+	top: -10px;
+	left: 5px;
+}
+.main_choices{
+	cursor: pointer;
+}
+#trim_options_btn {
+	position: absolute;
+	top: 2px;
+	left: 150px;
+	padding: 5px 10px;
+	background-color: rgba(255, 255, 255, 0.65);
+	color: #B8B8B8;
+	box-shadow: 0 0 10px 2px #B8B8B8;
+	text-shadow: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#trim_options_btn.on:hover{
+	opacity: 1;
+}
+#trim_options_btn.on{
+	opacity: .8;
+	color: #91D8F1;
+	box-shadow: 0 0 10px 2px #81CFEC;
+}
+#main_go{
+	bottom: 20px;
+	right: 50px;
+	height: 70px;
+	opacity: 0;
+}
+#main_go.on{
+	opacity: .8;
+	cursor: pointer;
+}
+#main_go.on:hover{
+	opacity: 1;
+}
+#main_bar2{
+	bottom: 20px;
+	right: 50px;
+	opacity: 0;
+	display: none;
+}
+#main_bar2fill{
+	bottom: 47px;
+	left: 529px;
+	width: 0;
+	height: 17px;
+	opacity: 0;
+	display: none;
+}
+
+#box_trim_options {
+	position: absolute;
+	top: 150px;
+	left: 300px;
+	opacity: 0;
+	margin-top: -500px;
+}
+#box_trim_options.on {
+	opacity: 1;
+	margin-top: 0px;
+}
+#box_trim_options_list {
+	top: 30px;
+	left: 20px;
+	width: 295px;
+}
+#box_trim_options_list div {
+	padding: 10px 20px;
+	margin: 5px 0;
+	cursor: pointer;
+	font-size: 18px;
+}
+#box_trim_options_list div:hover,#box_trim_options_list.on {
+	background-image: url(../img/boxhover.png);
+}
+
+#box_alert{
+	position: absolute;
+	top: 150px;
+	left: 300px;
+	opacity: 0;
+	margin-top: -500px;
+}
+#box_alert.on {
+	opacity: 1;
+	margin-top: 0px;
+}
+#box_alert_data {
+	top: 120px;
+	left: 20px;
+	width: 295px;
+	height: 140px;
+	word-break: break-all;
+	overflow-y: scroll;
+}
+#box_alert_icon {
+	top: 20px;
+	left: 45px;
+}
+
+#box_close{
+	position: absolute;
+	top: 200px;
+	left: 10px;
+	opacity: 0;
+	display: none;
+}
+#box_close_bg {
+	width: 880px;
+}
+#box_close.on {
+	opacity: 1;
+}
+#box_close_data {
+	top: 57px;
+	left: 238px;
+	width: 400px;
+	font-size: 24px;
+	text-align: center;
+}
+#box_close_yes {
+	top: 109px;
+	left: 262px;
+	cursor: pointer;
+}
+#box_close_no {
+	top: 109px;
+	left: 426px;
+	cursor: pointer;
+}
+#box_ver{
+	position: absolute;
+	top:38px;
+	right:10px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+
+

@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html>
+<head>
+  <title>CFmin - client</title>
+  <meta charset="utf-8" />
+  <!-- disable zooming -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0" />
+<script>
+	$SYSVARS='';
+	var gui = require('nw.gui');
+	var win = gui.Window.get();
+	win.showDevTools();
+	//win.setAlwaysOnTop(1);
+	win.setResizable(0);
+	win.height=600;
+	win.width=900;
+	win.y=(screen.availHeight-600)/2;
+	win.x=(screen.availWidth-900)/2;
+</script>
+<link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+	<div id="loading">
+		<img id="loading_bg" src="img/bg.png">
+		<div id="loading_0">
+			<img id="loading_bar" src="img/bar.png">
+			<img id="loading_barfill" src="img/barfill.png">
+		</div>
+		<img id="loading_1" src="img/t_a.png">
+		<img id="loading_2" src="img/t_b.png">
+	</div>
+	<iframe id="main" src="app.html"></iframe>
+</body>
+<script type="text/javascript" src="js/SYSLIB.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>
+
+
+

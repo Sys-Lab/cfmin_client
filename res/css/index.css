@@ -1,0 +1,69 @@
+﻿html,body,input,textarea{
+	font-family:"微软雅黑";
+	color: #fff;
+	text-shadow: 1px 1px 10px #57C0EE;
+	overflow: hidden;
+}
+#loading,#loading_0,#loading_1,#loading_2,#main{
+	-webkit-transition:all .6s ease-in-out;
+	transition:all .6s ease-in-out;
+}
+#loading{
+	position: absolute;
+	top:0px;
+	left:0px;
+	width: 900px;
+	height: 600px;
+	opacity: 0;
+}
+#main{
+	position: absolute;
+	top:0px;
+	left:0px;
+	width: 900px;
+	height: 600px;
+	opacity: 0;
+	border:none;
+	display: none;
+}
+#loading_bg{
+	width: 100%;
+	height:100%;
+	opacity: .5;
+}
+#loading_0{
+	position: absolute;
+	top:50%;
+	left:380px;
+	opacity: 0;
+}
+#loading_1{
+	position: absolute;
+	top:0px;
+	left:0px;
+	width: 100%;
+	height:100%;
+	opacity: 0;
+}
+#loading_2{
+	position: absolute;
+	top:0px;
+	left:0px;
+	width: 100%;
+	height:100%;
+	opacity: 0;
+}
+#loading_bar{
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+#loading_barfill{
+	position: absolute;
+	top: 11px;
+	left: 8px;
+	height: 10px;
+	width: 0px;
+	-webkit-transition:all 3s ease-in-out;
+	transition:all 3s ease-in-out;
+}
