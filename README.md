@@ -1,7 +1,7 @@
 # SYSLIB Common Font Minification Tool. - webfont gen
 client version
 
-Build 2014030201.
+Build 2014031101.
 
 This is a tool to compress font and gen webfont.
 It can trim font with a map 
